@@ -38,6 +38,12 @@
             text-decoration: none;
             display: inline-block;
             margin-top: 10px;
+            margin-left: 20px; /* Added spacing between text and button */
+        }
+        .course-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         img {
             width: 150px;
@@ -46,17 +52,8 @@
             display: block;
             margin-bottom: 20px;
         }
-        .progress {
-            width: 100%;
-            background-color: #ddd;
-        }
-        .progress-bar {
-            width: 0%;
-            height: 20px;
-            background-color: #4CAF50;
-            text-align: center;
-            line-height: 20px;
-            color: white;
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -68,29 +65,18 @@
     
     <div class="container">
         <h2>Courses Offered</h2>
-        <div>
-            <h3>Learn Internet of Things</h3>
-            <p>Enroll for the course at only INR 499</p>
+        <div class="course-title">
+            <span>Learn IoT from Scratch</span>
+            <button id="enrollButton" class="button">Enroll for the course at only INR 499</button>
+        </div>
+        <div id="paymentSection" class="hidden">
+            <p>Please scan the QR code to make the payment:</p>
             <img src="qr-code-placeholder.png" alt="QR Code for Payment" title="Scan to pay and enroll in the course">
-            <button id="enrollButton" class="button">Enroll Now</button>
         </div>
     </div>
 
     <div class="container hidden" id="courseContent">
-        <div class="progress">
-            <div class="progress-bar" id="progressBar">0%</div>
-        </div>
-        <div id="modules">
-            <!-- Detailed module content will go here -->
-        </div>
-        <button onclick="completeCourse()" class="button hidden" id="completeButton">Complete Course</button>
-    </div>
-
-    <div class="container hidden" id="certificateContainer">
-        <h2>Certificate of Completion</h2>
-        <p>Congratulations on completing the Learn Internet of Things course!</p>
-        <p>Name: <span id="studentName"></span></p>
-        <p>Date: <span id="completionDate"></span></p>
+        <!-- Course content will be dynamically displayed here after payment confirmation -->
     </div>
 
     <div class="container">
@@ -105,25 +91,9 @@
     </footer>
     <script>
         document.getElementById('enrollButton').onclick = function() {
-            this.parentElement.parentElement.classList.add('hidden');
-            document.getElementById('courseContent').classList.remove('hidden');
-            startCourse();
+            document.getElementById('paymentSection').classList.remove('hidden'); // Show QR code for payment
         };
-
-        function startCourse() {
-            // Initialize and display the course modules here
-        }
-
-        function nextModule(index) {
-            // Progress the course and update the progress bar
-        }
-
-        function completeCourse() {
-            document.getElementById('courseContent').classList.add('hidden');
-            document.getElementById('certificateContainer').classList.remove('hidden');
-            document.getElementById('studentName').textContent = 'Your Name'; // Replace with actual student name
-            document.getElementById('completionDate').textContent = new Date().toLocaleDateString();
-        }
+        // Here you would need a manual method to confirm payment since GitHub Pages doesn't support server-side code
     </script>
 </body>
 </html>

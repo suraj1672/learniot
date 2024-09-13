@@ -39,8 +39,24 @@
             display: inline-block;
             margin-top: 10px;
         }
-        .hidden {
-            display: none;
+        img {
+            width: 150px;
+            height: auto;
+            border-radius: 50%;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .progress {
+            width: 100%;
+            background-color: #ddd;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 20px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 20px;
+            color: white;
         }
     </style>
 </head>
@@ -52,42 +68,34 @@
     
     <div class="container">
         <h2>Courses Offered</h2>
-        <button id="startLearning" class="button">Start Learning</button>
-        <div id="modules">
-            <div class="module hidden">
-                <h3>Module 1: Introduction to IoT</h3>
-                <p>Learn about the needs, advantages, disadvantages, and architecture of IoT.</p>
-                <button onclick="nextModule(1)" class="button">Next Module</button>
-            </div>
-            <div class="module hidden">
-                <h3>Module 2: Hardware and Software in IoT</h3>
-                <p>Detailed exploration of the tools used in creating IoT solutions.</p>
-                <button onclick="nextModule(2)" class="button">Next Module</button>
-            </div>
-            <div class="module hidden">
-                <h3>Module 3: Microcontrollers and Sensors</h3>
-                <p>Understanding the role of microcontrollers in IoT, and different types of sensors used.</p>
-                <button onclick="nextModule(3)" class="button">Next Module</button>
-            </div>
-            <div class="module hidden">
-                <h3>Module 4: Practical IoT Projects</h3>
-                <p>Hands-on projects like blinking an LED and controlling a fan using Arduino.</p>
-                <button onclick="nextModule(4)" class="button">Next Module</button>
-            </div>
-            <div class="module hidden">
-                <h3>Module 5: Home Automation</h3>
-                <p>Building your own home automation system using Arduino.</p>
-                <button onclick="nextModule(5)" class="button">Next Module</button>
-            </div>
-            <div class="module hidden">
-                <h3>Module 6: Advanced IoT Applications</h3>
-                <p>Using NodeMCU for home automation and integrating with ThingSpeak for cloud connectivity.</p>
-            </div>
+        <div>
+            <h3>Learn Internet of Things</h3>
+            <p>Enroll for the course at only INR 499</p>
+            <img src="qr-code-placeholder.png" alt="QR Code for Payment" title="Scan to pay and enroll in the course">
+            <button id="enrollButton" class="button">Enroll Now</button>
         </div>
     </div>
-    
+
+    <div class="container hidden" id="courseContent">
+        <div class="progress">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+        <div id="modules">
+            <!-- Detailed module content will go here -->
+        </div>
+        <button onclick="completeCourse()" class="button hidden" id="completeButton">Complete Course</button>
+    </div>
+
+    <div class="container hidden" id="certificateContainer">
+        <h2>Certificate of Completion</h2>
+        <p>Congratulations on completing the Learn Internet of Things course!</p>
+        <p>Name: <span id="studentName"></span></p>
+        <p>Date: <span id="completionDate"></span></p>
+    </div>
+
     <div class="container">
         <h2>About Me</h2>
+        <img src="path_to_your_image.jpg" alt="Suraj">
         <p>Senior Associate IoT Mentor at Athena | Robotics & IoT Mentor | 🚀 STEM Educator | 🧠 Atal Lab Mentor | DevOps Engineer 🌐| RedHat Certified EX180 🎓</p>
         <a href="https://www.linkedin.com/feed/" class="button">Visit my LinkedIn</a>
     </div>
@@ -96,18 +104,25 @@
         <p>© 2024 Suraj's Learn IoT. All rights reserved.</p>
     </footer>
     <script>
-        let currentModule = 0;
-        const modules = document.querySelectorAll('.module');
-        document.getElementById('startLearning').onclick = function() {
-            this.style.display = 'none';
-            nextModule(0);
+        document.getElementById('enrollButton').onclick = function() {
+            this.parentElement.parentElement.classList.add('hidden');
+            document.getElementById('courseContent').classList.remove('hidden');
+            startCourse();
         };
+
+        function startCourse() {
+            // Initialize and display the course modules here
+        }
+
         function nextModule(index) {
-            if (currentModule > 0) modules[currentModule - 1].style.display = 'none';
-            if (index < modules.length) {
-                modules[index].style.display = 'block';
-                currentModule = index + 1;
-            }
+            // Progress the course and update the progress bar
+        }
+
+        function completeCourse() {
+            document.getElementById('courseContent').classList.add('hidden');
+            document.getElementById('certificateContainer').classList.remove('hidden');
+            document.getElementById('studentName').textContent = 'Your Name'; // Replace with actual student name
+            document.getElementById('completionDate').textContent = new Date().toLocaleDateString();
         }
     </script>
 </body>
